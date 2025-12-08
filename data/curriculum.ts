@@ -8,7 +8,7 @@
  */
 
 import React from "react";
-import { Module, Curriculum } from "@/types/curriculum";
+import { Module, Curriculum, Category } from "@/types/curriculum";
 
 // Helper function to create URL-friendly slugs from Danish titles
 function createSlug(title: string): string {
@@ -494,6 +494,49 @@ const guides: Module = {
 };
 
 // ============================================
+// CATEGORIES
+// ============================================
+const categories: Category[] = [
+  {
+    slug: "grundkursus",
+    title: "Grundkursus",
+    order: 1,
+    modules: [
+      introduktionTilMidjourney,
+      genereringAfBilleder,
+      arbejdVidereMedDitBillede,
+      skabBillederMedBilleder,
+      afrunding,
+    ],
+  },
+  {
+    slug: "ekstra",
+    title: "Ekstra",
+    order: 2,
+    modules: [
+      avanceredeFunktioner,
+      nyeFunktioner,
+    ],
+  },
+  {
+    slug: "bonus",
+    title: "Bonus",
+    order: 3,
+    modules: [
+      bedreBilleder,
+    ],
+  },
+  {
+    slug: "guides",
+    title: "Guides",
+    order: 4,
+    modules: [
+      guides,
+    ],
+  },
+];
+
+// ============================================
 // COMPLETE CURRICULUM
 // ============================================
 export const curriculum: Curriculum = {
@@ -508,6 +551,7 @@ export const curriculum: Curriculum = {
     bedreBilleder,
     guides,
   ],
+  categories,
 };
 
 // ============================================

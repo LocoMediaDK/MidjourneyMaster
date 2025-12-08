@@ -41,10 +41,28 @@ export interface Module {
   order: number;
 }
 
+// A category grouping multiple modules
+export interface Category {
+  // Unique identifier for the category
+  slug: string;
+  
+  // Display title of the category
+  title: string;
+  
+  // Modules in this category
+  modules: Module[];
+  
+  // Order of the category in the sidebar
+  order: number;
+}
+
 // The complete curriculum structure
 export interface Curriculum {
   // All modules in the course
   modules: Module[];
+  
+  // Categories for organizing modules in the sidebar
+  categories?: Category[];
 }
 
 // Helper type for navigation - represents current position in course

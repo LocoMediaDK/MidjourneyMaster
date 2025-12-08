@@ -15,6 +15,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MJkursus.dk - Lær Midjourney",
   description: "Komplet kursus i Midjourney. Lær at skabe fantastiske AI-billeder.",
+  // Custom favicon from public/images
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
