@@ -8,22 +8,20 @@ import Image from "next/image";
 
 export default function Navigation() {
   return (
-    <div className="navbar bg-base-200 border-b border-base-300 min-h-[90px]">
-      <div className="flex-1">
-        {/* Logo */}
-        <Link href="/" className="p-2 hover:bg-transparent">
-          <Image 
-            src="/images/logo.png" 
-            alt="MJkursus.dk" 
-            width={263}
-            height={70}
-            priority
-          />
-        </Link>
-      </div>
+    <div className="navbar bg-base-200 border-b border-base-300 min-h-[90px] justify-center relative">
+      {/* Logo - centered */}
+      <Link href="/" className="p-2 hover:bg-transparent">
+        <Image 
+          src="/images/logo.png" 
+          alt="MJkursus.dk" 
+          width={263}
+          height={70}
+          priority
+        />
+      </Link>
       
-      <div className="flex-none">
-        {/* Main navigation links */}
+      {/* Main navigation links - positioned absolutely on the right */}
+      <div className="absolute right-4">
         <ul className="menu menu-horizontal px-1">
           <li>
             <Link href="/kursus" className="font-medium">
