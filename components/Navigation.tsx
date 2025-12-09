@@ -1,10 +1,11 @@
 /**
  * Navigation component - Top navigation bar for the site.
- * Shows the site logo/title and main navigation links.
+ * Shows the site logo/title and user menu (login/logout).
  */
 
 import Link from "next/link";
 import Image from "next/image";
+import UserMenu from "./UserMenu";
 
 export default function Navigation() {
   return (
@@ -20,20 +21,9 @@ export default function Navigation() {
         />
       </Link>
       
-      {/* Main navigation links - positioned absolutely on the right */}
+      {/* User menu - positioned absolutely on the right */}
       <div className="absolute right-4">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link href="/kursus" className="font-medium">
-              Kursus
-            </Link>
-          </li>
-          {/* 
-            TODO: Add more links when needed, e.g.:
-            - Login/logout button
-            - User profile menu
-          */}
-        </ul>
+        <UserMenu />
       </div>
     </div>
   );

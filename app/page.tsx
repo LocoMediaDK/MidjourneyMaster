@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import CheckoutButton from "@/components/CheckoutButton";
 
 // ============================================
 // HERO SECTION
@@ -46,19 +47,19 @@ function HeroSection() {
             <span className="font-bold">nemmere og sjovere</span> at skabe AI-billeder
           </p>
           
-          {/* Experience text - more prominent */}
-          <p className="text-lg md:text-xl text-white/90 mb-10">
+          {/* Experience text - smaller than the bonusses text */}
+          <p className="text-base md:text-lg text-white/90 mb-10">
             Du får hele min erfaring fra generering af <span className="font-bold text-yellow-400">42.290</span> Midjourney billeder i én samlet pakke!
           </p>
           
           {/* CTA Button - large and prominent */}
           <div>
-            <a href="https://ailab.dk/midjourney-master" className="btn bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 border-none text-xl md:text-2xl px-10 md:px-16 py-5 shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all font-bold tracking-wide h-auto min-h-[4.5rem] rounded-2xl">
+            <CheckoutButton className="btn bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 border-none text-xl md:text-2xl px-10 md:px-16 py-5 shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all font-bold tracking-wide h-auto min-h-[4.5rem] rounded-2xl">
               JA! Jeg vil mestre Midjourney
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </a>
+            </CheckoutButton>
             <p className="text-white/70 text-base mt-4">
               Få øjeblikkelig adgang til pakken og lær i dit eget tempo
             </p>
@@ -429,17 +430,12 @@ function PricingSection() {
           </div>
           
           {/* CTA Button */}
-          <a 
-            href="https://ailab.dk/midjourney-master" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 border-none text-xl md:text-2xl px-10 md:px-16 py-5 shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all font-bold tracking-wide h-auto min-h-[4.5rem] rounded-2xl"
-          >
+          <CheckoutButton className="btn bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-slate-900 border-none text-xl md:text-2xl px-10 md:px-16 py-5 shadow-2xl hover:shadow-orange-500/40 hover:scale-105 transition-all font-bold tracking-wide h-auto min-h-[4.5rem] rounded-2xl">
             JA! Jeg vil mestre Midjourney
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 md:w-7 md:h-7">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
-          </a>
+          </CheckoutButton>
           <p className="text-white/70 text-base mt-4">
             Få øjeblikkelig adgang til pakken og lær i dit eget tempo
           </p>
