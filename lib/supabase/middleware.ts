@@ -53,12 +53,37 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // If logged in and trying to access login page, redirect to kursus
+  // If user is logged in and trying to access protected route, check if they've paid
+  if (isProtectedRoute && user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("has_paid")
+      .eq("id", user.id)
+      .single();
+
+    if (!profile || !profile.has_paid) {
+      // User hasn't paid - redirect to homepage
+      const url = request.nextUrl.clone();
+      url.pathname = "/";
+      return NextResponse.redirect(url);
+    }
+  }
+
+  // If logged in with paid access and trying to access login page, redirect to kursus
   if (isLoginPage && user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/kursus";
-    return NextResponse.redirect(url);
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("has_paid")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.has_paid) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/kursus";
+      return NextResponse.redirect(url);
+    }
   }
 
   return supabaseResponse;
 }
+

@@ -7,6 +7,42 @@
 import Link from "next/link";
 import Image from "next/image";
 import CheckoutButton from "@/components/CheckoutButton";
+import type { Metadata } from "next";
+
+// ============================================
+// METADATA - SEO and Social Media
+// ============================================
+export const metadata: Metadata = {
+  title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
+  description:
+    "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
+  
+  // Open Graph - for Facebook, LinkedIn, etc.
+  openGraph: {
+    type: "website",
+    url: "https://mjkursus.dk",
+    title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
+    description:
+      "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
+    images: [
+      {
+        url: "https://mjkursus.dk/images/Logo.png",
+        width: 263,
+        height: 70,
+        alt: "Midjourney Master Logo",
+      },
+    ],
+  },
+  
+  // Twitter
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
+    description:
+      "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
+    images: ["https://mjkursus.dk/images/Logo.png"],
+  },
+};
 
 // ============================================
 // HERO SECTION
@@ -212,13 +248,13 @@ function CourseContentSection() {
                 <h3 className="card-title text-lg">{module.title}</h3>
                 {module.description ? (
                   <p className="text-base-content/70">{module.description}</p>
-                ) : (
+                ) : module.paragraphs ? (
                   <div className="space-y-3">
                     {module.paragraphs.map((paragraph, pIndex) => (
                       <p key={pIndex} className="text-base-content/70">{paragraph}</p>
                     ))}
                   </div>
-                )}
+                ) : null}
               </div>
             </div>
           ))}

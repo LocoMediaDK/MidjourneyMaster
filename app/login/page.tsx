@@ -28,21 +28,53 @@ export default function LoginPage() {
     setLoading(true);
     setMessage(null);
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        // Redirect to this URL after clicking the magic link
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
+    console.log("[Magic Link] Starting login process for:", email);
 
-    if (error) {
-      setMessage({ type: "error", text: error.message });
-    } else {
-      setMessage({
-        type: "success",
-        text: "Tjek din email! Vi har sendt dig et login-link.",
+    try {
+      // First check if user exists and has paid
+      console.log("[Magic Link] Checking if user can login...");
+      const response = await fetch("/api/auth/send-magic-link", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
+
+      const data = await response.json();
+      console.log("[Magic Link] API response:", data);
+
+      if (!data.canLogin) {
+        console.log("[Magic Link] ❌ User cannot login:", data.error);
+        setMessage({ type: "error", text: data.error || "Du har ikke adgang" });
+        setLoading(false);
+        return;
+      }
+
+      console.log("[Magic Link] ✅ User authorized, sending magic link...");
+
+      // User can login - send magic link via Supabase client
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          shouldCreateUser: false,
+        },
+      });
+
+      if (error) {
+        console.log("[Magic Link] ❌ Supabase error:", error.message);
+        setMessage({ type: "error", text: error.message });
+      } else {
+        console.log("[Magic Link] ✅ Magic link sent successfully to:", email);
+        setMessage({
+          type: "success",
+          text: "Tjek din email! Vi har sendt dig et login-link.",
+        });
+      }
+    } catch (error) {
+      console.error("[Magic Link] ❌ Unexpected error:", error);
+      setMessage({ type: "error", text: "Der opstod en fejl. Prøv igen." });
     }
 
     setLoading(false);
@@ -54,19 +86,48 @@ export default function LoginPage() {
     setLoading(true);
     setMessage(null);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    console.log("[Password Login] Starting login for:", email);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
+      console.log("[Password Login] ❌ Auth error:", error.message);
       setMessage({ type: "error", text: error.message });
-    } else {
-      // Redirect happens automatically via middleware
-      window.location.href = "/kursus";
+      setLoading(false);
+      return;
     }
 
-    setLoading(false);
+    console.log("[Password Login] ✅ Auth successful, checking payment status...");
+
+    // Check if user has paid
+    if (data.user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("has_paid")
+        .eq("id", data.user.id)
+        .single();
+
+      console.log("[Password Login] Profile:", profile);
+
+      if (!profile || !profile.has_paid) {
+        console.log("[Password Login] ❌ User has not paid, signing out");
+        await supabase.auth.signOut();
+        setMessage({ 
+          type: "error", 
+          text: "Du har ikke adgang til kurset. Gennemfør venligst købet først." 
+        });
+        setLoading(false);
+        return;
+      }
+
+      console.log("[Password Login] ✅ User has paid, redirecting to /kursus");
+    }
+
+    // User has paid - redirect
+    window.location.href = "/kursus";
   };
 
   return (
@@ -225,3 +286,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

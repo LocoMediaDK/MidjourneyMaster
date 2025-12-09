@@ -40,7 +40,7 @@ export default function UserMenu() {
   // Handle logout
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    window.location.href = "/";
+    window.location.href = "/login";
   };
 
   // Show loading state
@@ -136,3 +136,4 @@ export default function UserMenu() {
     </Link>
   );
 }
+
