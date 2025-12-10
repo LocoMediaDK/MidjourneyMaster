@@ -4,45 +4,8 @@
  * Based on the original ailab.dk/midjourney-master design.
  */
 
-import Link from "next/link";
 import Image from "next/image";
 import CheckoutButton from "@/components/CheckoutButton";
-import type { Metadata } from "next";
-
-// ============================================
-// METADATA - SEO and Social Media
-// ============================================
-export const metadata: Metadata = {
-  title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
-  description:
-    "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
-  
-  // Open Graph - for Facebook, LinkedIn, etc.
-  openGraph: {
-    type: "website",
-    url: "https://mjkursus.dk",
-    title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
-    description:
-      "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
-    images: [
-      {
-        url: "https://mjkursus.dk/images/Logo.png",
-        width: 263,
-        height: 70,
-        alt: "Midjourney Master Logo",
-      },
-    ],
-  },
-  
-  // Twitter
-  twitter: {
-    card: "summary_large_image",
-    title: "Online Midjourney Kursus -> Den komplette Midjourney Master",
-    description:
-      "Lær Midjourney hjemme foran din computer i dit helt eget tempo (med garanti). Alt min erfaring fra generering af 42.290 billeder i én samlet pakke.",
-    images: ["https://mjkursus.dk/images/Logo.png"],
-  },
-};
 
 // ============================================
 // HERO SECTION
@@ -242,7 +205,7 @@ function CourseContentSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((module, index) => (
-            <div key={index} className="card bg-base-200 hover:shadow-lg transition-shadow">
+              <div key={index} className="card bg-base-200 hover:shadow-lg transition-shadow">
               <div className="card-body">
                 <div className="text-4xl mb-4">{module.icon}</div>
                 <h3 className="card-title text-lg">{module.title}</h3>
@@ -357,10 +320,12 @@ function WhyMidjourneySection() {
           {/* Why Midjourney - Image left, text right */}
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <div className="flex-shrink-0 w-full md:w-2/5">
-              <img 
+              <Image 
                 src="/images/sales/hvorfor-midjourney.avif" 
                 alt="Hvorfor Midjourney" 
-                className="w-full"
+                width={400}
+                height={300}
+                className="w-full h-auto"
               />
             </div>
             <div className="flex-1">
@@ -385,10 +350,12 @@ function WhyMidjourneySection() {
           {/* Why online course - Image left, text right */}
           <div className="flex flex-col md:flex-row gap-6 items-start">
             <div className="flex-shrink-0 w-full md:w-2/5">
-              <img 
+              <Image 
                 src="/images/sales/hvorfor-online.avif" 
                 alt="Hvorfor et online kursus" 
-                className="w-full"
+                width={400}
+                height={300}
+                className="w-full h-auto"
               />
             </div>
             <div className="flex-1">

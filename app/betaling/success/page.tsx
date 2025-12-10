@@ -5,7 +5,6 @@
  */
 
 import Link from "next/link";
-import Image from "next/image";
 
 export default function PaymentSuccessPage() {
   return (
@@ -83,4 +82,7 @@ export default function PaymentSuccessPage() {
     </div>
   );
 }
+
+
+
 

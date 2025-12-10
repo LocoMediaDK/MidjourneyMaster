@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 // Using Inter font for a clean, modern look
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +31,9 @@ export default function RootLayout({
     // data-theme="cupcake" applies the DaisyUI cupcake theme
     <html lang="da" data-theme="cupcake">
       <body className={`${inter.className} min-h-screen`}>
+        {/* Google Analytics tracking */}
+        <GoogleAnalytics />
+        
         {/* Top navigation bar */}
         <Navigation />
         

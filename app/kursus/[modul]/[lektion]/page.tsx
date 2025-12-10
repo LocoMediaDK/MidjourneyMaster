@@ -25,10 +25,10 @@ export async function generateStaticParams() {
   const paths: { modul: string; lektion: string }[] = [];
 
   // Loop through all modules and lessons to create paths
-  for (const module of curriculum.modules) {
-    for (const lesson of module.lessons) {
+  for (const curriculumModule of curriculum.modules) {
+    for (const lesson of curriculumModule.lessons) {
       paths.push({
-        modul: module.slug,
+        modul: curriculumModule.slug,
         lektion: lesson.slug,
       });
     }
