@@ -12,7 +12,7 @@ export default function Navigation() {
       {/* Logo - centered */}
       <Link href="/" className="p-2 hover:bg-transparent">
         <Image 
-          src="/images/logo.png" 
+          src="/images/Logo.png" 
           alt="MJkursus.dk" 
           width={263}
           height={70}
